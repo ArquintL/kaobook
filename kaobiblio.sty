@@ -178,6 +178,11 @@
 	}%
 	\DeclareCiteCommand{\kaobiblio@sidecite}[\kaobiblio@marginnote]{%
 	}{%
+		% make citations orange if draft mode is enabled and an explicit vertical offset is given:
+		\providebool{our_draft}% define `our_draft` and set it to false if it's not defined yet
+		\ifthenelse{\boolean{our_draft}}{%
+			\IfNoValueOrEmptyTF{#1}{}{\color{orange}}%
+		}{}%
 		\formatmargincitation{\thefield{entrykey}}%
 	}{%
 		\\% separator between multiple citations
