@@ -442,9 +442,9 @@
 \renewcommand*{\raggedleftmarginnote}{} % Suppress left margin
 \renewcommand*{\raggedrightmarginnote}{} % Suppress right margin
 \renewcommand*{\marginfont}{\@margin@par} % Format marginnotes according to \@marginpar (see above)
-\renewcommand{\marginnotevadjust}{0.8\vscale} % Bring all marginnotes downwards a bit
-\marginposadjustment=0.1mm % Bring downwards also the marginpars
-\marginheightadjustment=.5cm % Bring downwards also the marginpars
+\renewcommand{\marginnotevadjust}{0pt} % Bring all marginnotes downwards a bit; LA: adjusts the top position where marginpars start but seems to affect margintoc only (larger values mean lower marginpars); Note that there's a separate value for adjusting the margintoc (see \mtocshift)
+\marginposadjustment=-2\vscale % Bring downwards also the marginpars; LA: shifts placement of marginpar with respect to the text at which it is anchored (larger values mean lower marginpars)
+\marginheightadjustment=.6\vscale % .6\vscale % Bring downwards also the marginpars; LA: adjusting this value changes how far down the lowest marginpar is placed (larger values mean lower marginpars)
 %\RequirePackage[marginnote=true]{snotez} % Provides options for sidenotes
 
 % Copied from snotez's \sidenote
@@ -458,7 +458,8 @@
 
 % Command to detect whether we are inside a tcolorbox environment
 \newif\ifinfloat % First, set this flag whenever we are in a tcolorbox environment...
-\AtBeginEnvironment{tcolorbox}{\infloattrue\renewcommand{\marginnotevadjust}{-1.4\vscale}}
+% \AtBeginEnvironment{tcolorbox}{\infloattrue\renewcommand{\marginnotevadjust}{-1.4\vscale}}
+\AtBeginEnvironment{tcolorbox}{\infloattrue}
 \AtBeginEnvironment{minipage}{\infloattrue}
 
 \def\IfInFloatingEnvir{% Then, detect the flag
